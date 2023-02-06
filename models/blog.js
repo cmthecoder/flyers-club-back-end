@@ -31,6 +31,7 @@ const blogSchema = new Schema (
       enum: ['FAA', 'Adventure', 'Milestones', 'Advice', 'Events']
     },
     
+    comments: [commentSchema],
     author: {type: Schema.Types.ObjectId, ref: 'Profile'}
   },
 

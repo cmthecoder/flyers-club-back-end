@@ -2,7 +2,6 @@ import { Profile } from "../models/profile.js"
 import { Blog } from "../models/blog.js"
 
 const create = async (req, res) => {
-  console.log('THIS IS IT BRUHHHHH', req.body.profile)
   try {
     req.body.author = req.user.profile
     const blog = await Blog.create(req.body)
@@ -14,12 +13,12 @@ const create = async (req, res) => {
     blog.author = profile
     res.status(201).json(blog)
   } catch (error) {
-    console.log(err)
+    console.log(error)
     res.status(500).json(error)
   }
 }
 
-const index = async(req, res) => {
+const index = async (req, res) => {
   try {
     const blogs = await Blog.find({})
     .populate('author')
@@ -30,7 +29,19 @@ const index = async(req, res) => {
   }
 }
 
+const show = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id)
+    .populate('author')
+    .populate('comments.author')
+    res.status(200).json(blog)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
 export {
   create,
   index,
+  show
 }
