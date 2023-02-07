@@ -9,9 +9,10 @@ const router = Router()
 
 // ========= Protected Routes ========= 
 router.use(decodeUserFromToken)
-router.post('/', checkAuth, blogsCtrl.create)
 router.get('/', checkAuth, blogsCtrl.index)
 router.get('/:id', checkAuth, blogsCtrl.show)
+router.post('/', checkAuth, blogsCtrl.create)
+router.post('/:id/comments', checkAuth, blogsCtrl.createComment)
 router.put('/:id', checkAuth, blogsCtrl.update)
 router.delete('/:id', checkAuth, blogsCtrl.delete)
 
