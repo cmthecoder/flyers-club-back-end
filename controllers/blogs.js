@@ -82,11 +82,26 @@ const createComment = async (req, res) => {
   }
 }
 
+const updateComment = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.blogId)
+    const comment = blog.comments.id(req.params.commentId)
+    comment.text = req.body.text
+    await blog.save()
+    res.status(200).json(blog)
+  } catch (error) {
+    res.status(500).json(err)
+  }
+}
+
+
 export {
+  createComment,
+  updateComment,
+
   create,
   index,
   show,
   update,
   deleteBlog as delete,
-  createComment,
 }
