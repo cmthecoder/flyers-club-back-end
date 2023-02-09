@@ -28,9 +28,9 @@ const blogSchema = new Schema (
     category: {
       type: String,
       required: true,
-      enum: ['FAA', 'Adventure', 'Milestones', 'Advice', 'Events']
+      enum: ['FAA', 'Adventure', 'Milestone', 'Advice', 'Event']
     },
-    
+
     comments: [commentSchema],
     author: {type: Schema.Types.ObjectId, ref: 'Profile'}
   },
